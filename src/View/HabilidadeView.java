@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,8 +19,7 @@ public class HabilidadeView extends JFrame {
     private JTextField taxaAcerto;
 
     private JTextArea habilidadesCadastradas;
-    private JButton btnCadastrar;
-    private JButton btnLimpar;
+
 
 
     public HabilidadeView() {
@@ -86,14 +84,6 @@ public class HabilidadeView extends JFrame {
 
     public JTextArea getHabilidadesCadastradas() {
         return habilidadesCadastradas;
-    }
-
-    public JButton getBtnCadastrar() {
-        return btnCadastrar;
-    }
-
-    public JButton getBtnLimpar() {
-        return btnLimpar;
     }
 
 }
