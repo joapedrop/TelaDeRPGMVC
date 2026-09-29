@@ -1,29 +1,25 @@
 package Controller;
 
-import java.util.ArrayList;
-
 import Model.Habilidade;
 import View.HabilidadeView;
 
 public class HabilidadeController {
     private HabilidadeView view;
-    private ArrayList<Habilidade> habilidades;
+    // 1. Criamos o atributo para o modelo de habilidade
+    private Habilidade modelo;
 
     public HabilidadeController(HabilidadeView view) {
         this.view = view;
-        habilidades = new ArrayList<>();
-
-        habilidades.add(new Habilidade("Furtividade", "67%"));
-        habilidades.add(new Habilidade("Cura", "67%"));
-        habilidades.add(new Habilidade("Força", "67%"));
+        
+       
+        this.modelo = new Habilidade();
+        
+        
+        this.view.configurarModelo(this.modelo);
     }
 
-    private void mostrarHabilidades() {
-        String texto = "";
-        for (Habilidade habilidade : habilidades) {
-            texto = habilidade.getNome() + "\n"; // insere quebra de linha
-        }
-
+    private void ARmazenarHabilidades() {
+       
+        String HabilidadeSelect = view.getComboHabilidades().getSelectedItem().toString();
     }
-
 }

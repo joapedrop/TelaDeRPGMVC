@@ -1,91 +1,59 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
-import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
-import java.awt.Insets;
-
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import Model.Habilidade;
 
 public class HabilidadeView extends JFrame {
-    private JTextField txtNome;
-    private JTextField taxaAcerto;
-
-    private JTextArea habilidadesCadastradas;
-
-
+    private JComboBox<String> comboHabilidades;
+    private Habilidade habilidademodel;
 
     public HabilidadeView() {
         setTitle("Cadastro de Habilidades");
-        setSize(600,400);
+        setSize(400, 150); 
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);//vai deixar no centro
-        criarComponentes();
-        montarTela(); 
+        setLocationRelativeTo(null); 
+        
+       
+        comboHabilidades = new JComboBox<>();
+        
+        
+        
+        montarTela();
     }
 
-    private void criarComponentes(){
-        txtNome = new JTextField(20);//define o tamanho em 20 colunas
-        taxaAcerto = new JTextField(10);
-        habilidadesCadastradas = new JTextArea();
-        habilidadesCadastradas.setEditable(false);//area não editavel
-        //padrao da fonte é 11
-        habilidadesCadastradas.setFont(new Font("Monospaced", Font.PLAIN, 14));
-
-    }
-
-    private void montarTela(){
-        setLayout(new BorderLayout(10,10));
-        JPanel painelFormulario = new JPanel(new GridLayout());
-        painelFormulario.setBorder(
-            BorderFactory.createTitledBorder("Cadastrar Habilidade")
-        );
-
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10);
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-
-        painelFormulario.add(new JLabel("Nome da habilidade"), gbc);
-        gbc.gridx = 1;
-        painelFormulario.add(txtNome, gbc);
-
-
-        // Painel de listagem
-        JPanel painelLista =new JPanel(new BorderLayout());
-
-        painelLista.setBorder(
-            BorderFactory.createTitledBorder("Habilidades cadastradas"));
-
-        JScrollPane scroll = new JScrollPane(habilidadesCadastradas);
-        painelLista.add(scroll,BorderLayout.CENTER);
-
-        //adiciona o painel no JFrame
-        add(painelFormulario,BorderLayout.NORTH);
-
-        add(painelLista,BorderLayout.CENTER);
-}
-
-// GETTERS
-   public JTextField getTxtNome() {
-        return txtNome;
-    }
-
-    public JTextField getTaxaAcerto() {
-        return taxaAcerto;
-    }
-
-    public JTextArea getHabilidadesCadastradas() {
-        return habilidadesCadastradas;
-    }
-
-}
-
+   
+    public void configurarModelo(Habilidade model) {
+        this.habilidademodel = model;
+        
+        String[] habilidadesnome = habilidademodel.getNome();
+        String[] habilitadetaxadeacerto = habilidademodel.getTaxaAcerto();
+        
     
+        for (int i = 0; i < habilidadesnome.length; i++) {
+            comboHabilidades.addItem(habilidadesnome[i] + ", Taxa de acerto: " + habilitadetaxadeacerto[i]);
+        }
+    }
+
+    private void montarTela() {
+        setLayout(new BorderLayout(10, 10));
+
+        JPanel painelFormulario = new JPanel(new GridLayout(1, 2, 10, 10));
+        painelFormulario.setBorder(
+                BorderFactory.createTitledBorder("Selecionar Habilidade"));
+
+        painelFormulario.add(new JLabel("Escolha a Habilidade:"));
+        painelFormulario.add(comboHabilidades);
+
+        add(painelFormulario, BorderLayout.CENTER);
+    }
+
+    public JComboBox<String> getComboHabilidades() {
+        return comboHabilidades;
+    }
+}
