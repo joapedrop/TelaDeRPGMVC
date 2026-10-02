@@ -4,23 +4,20 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Model.Habilidade;
 
-public class HabilidadeView extends JFrame {
+public class HabilidadeView extends JPanel {
     private JCheckBox[] checkHabilidades;
 
     private Habilidade habilidademodel;
     private JPanel painelFormulario;
 
     public HabilidadeView() {
-        setTitle("Cadastro de Habilidades");
         setSize(400, 150);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+  
 
         checkHabilidades = new JCheckBox[4];
 

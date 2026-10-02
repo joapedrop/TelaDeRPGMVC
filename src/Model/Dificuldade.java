@@ -1,7 +1,7 @@
 package Model;
 
 public enum Dificuldade {
-    FACIL, 
-    MEDIO, 
-    DIFICIL
+    FACIL, // 0
+    MEDIO, // 1
+    DIFICIL//2
 }

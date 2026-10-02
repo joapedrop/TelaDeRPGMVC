@@ -7,7 +7,7 @@ import View.HabilidadeView;
 
 public class HabilidadeController {
     private HabilidadeView view;
-    // 1. Criamos o atributo para o modelo de habilidade
+    
     private Habilidade modelo;
 
     public HabilidadeController(HabilidadeView view) {

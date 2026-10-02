@@ -1,12 +1,13 @@
-import View.HabilidadeView;
-import Controller.HabilidadeController;
+import View.ClasseView;
+import Controller.ClasseController;
 
 public class App {
+    
     public static void main(String[] args) throws Exception {
        
-        HabilidadeView tela = new HabilidadeView();
+        ClasseView tela = new ClasseView();
 
-        HabilidadeController controle = new HabilidadeController(tela);
+        ClasseController controle = new ClasseController(tela);
 
         tela.setVisible(true);
     }
