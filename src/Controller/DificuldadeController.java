@@ -11,30 +11,35 @@ public class DificuldadeController {
 
     public DificuldadeController(DificuldadadeView viewDificuldade) {
         this.ViewDificuldade = viewDificuldade;
-
-      this.ViewDificuldade.configurarModelo(this.modelDificuldade);
+        
+     
+        this.modelDificuldade = Dificuldade.FACIL; 
+        this.ViewDificuldade.configurarModelo(this.modelDificuldade);
 
         JRadioButton[] SD = ViewDificuldade.getSelectdificuldade();
         for (int i = 0; i < SD.length; i++) {
-        
             SD[i].addActionListener(e -> ARmazenarDificuldade());
         }
     }
 
     private void ARmazenarDificuldade() {
-    JRadioButton[] SD = ViewDificuldade.getSelectdificuldade();
-    
-    for (int i = 0; i < SD.length; i++) {
-        if (SD[i].isSelected()) {
-            String nome = SD[i].getText(); 
-            
-            
-            this.modelDificuldade = Dificuldade.valueOf(nome.toUpperCase());
-            
-            System.out.println("Dificuldade selecionada: " + this.modelDificuldade);
-            break;
+        JRadioButton[] SD = ViewDificuldade.getSelectdificuldade();
+        for (int i = 0; i < SD.length; i++) {
+            if (SD[i].isSelected()) {
+                String nome = SD[i].getText(); 
+                
+                
+                String nomeTratado = nome.toUpperCase().replace("É", "E").replace("Á", "A");
+                this.modelDificuldade = Dificuldade.valueOf(nomeTratado);
+                
+                System.out.println("Dificuldade atualizada no Controller: " + this.modelDificuldade);
+                break;
+            }
         }
     }
-}
 
+    
+    public Dificuldade getModelDificuldade() {
+        return this.modelDificuldade;
+    }
 }

@@ -1,45 +1,56 @@
 package Controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JCheckBox;
-
 import Model.Habilidade;
 import View.HabilidadeView;
 
 public class HabilidadeController {
     private HabilidadeView view;
-    
-    private Habilidade modelo;
+    private List<Habilidade> catalogoHabilidades;
+    private ArrayList<Habilidade> habilidadesSelecionadas; 
 
     public HabilidadeController(HabilidadeView view) {
         this.view = view;
+        this.catalogoHabilidades = new ArrayList<>();
+        this.habilidadesSelecionadas = new ArrayList<>();
 
-        this.modelo = new Habilidade();
+        catalogoHabilidades.add(new Habilidade("Furtividade", "67%"));
+        catalogoHabilidades.add(new Habilidade("Força", "67%"));
+        catalogoHabilidades.add(new Habilidade("Cura", "67%"));
+        catalogoHabilidades.add(new Habilidade("Roubo", "67%"));
 
+        this.view.configurarModelo(this.catalogoHabilidades);
+
+       
         JCheckBox[] LCB = view.getCheckHabilidades();
-        this.view.configurarModelo(this.modelo);
-
         for (int i = 0; i < LCB.length; i++) {
-            LCB[i].addActionListener(e -> ARmazenarHabilidades());
+            if (i < catalogoHabilidades.size()) {
+                LCB[i].putClientProperty("objetoHabilidade", catalogoHabilidades.get(i));
+            }
+            LCB[i].addActionListener(e -> armazenarHabilidades());
         }
     }
 
-    private void ARmazenarHabilidades() {
-        StringBuilder texto = new StringBuilder();
+    private void armazenarHabilidades() {
+        this.habilidadesSelecionadas.clear();
         JCheckBox[] LCB = view.getCheckHabilidades();
 
         for (int i = 0; i < LCB.length; i++) {
-            boolean correto = LCB[i].isSelected();
-
-            if (correto) {
-                texto.append(LCB[i].getText() + ", ");
+            if (LCB[i].isSelected()) {
+               
+                Habilidade h = (Habilidade) LCB[i].getClientProperty("objetoHabilidade");
+                if (h != null) {
+                    this.habilidadesSelecionadas.add(h);
+                }
             }
         }
-        String Resultado = texto.toString();
+        System.out.println("Habilidades guardadas no Controller: " + habilidadesSelecionadas.size());
+    }
 
-        if (Resultado.endsWith(", ")) {
-            Resultado = Resultado.substring(0, Resultado.length() - 2);
-        }
-
-        System.out.println(Resultado);
+    // Retorna exatamente o ArrayList que a PersonagemView precisa
+    public ArrayList<Habilidade> getHabilidadesSelecionadas() {
+        return this.habilidadesSelecionadas;
     }
 }

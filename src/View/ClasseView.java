@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 import Model.Classe;
 
-public class ClasseView extends JFrame {
+public class ClasseView extends JPanel {
     private JComboBox<String> SelectClasse;
 
     private Classe ModelClasse;
@@ -19,8 +19,6 @@ public class ClasseView extends JFrame {
 
     public ClasseView() {
         setSize(400, 150);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
 
         SelectClasse = new JComboBox<>();
 

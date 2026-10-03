@@ -1,46 +1,51 @@
 package Controller;
 
 import javax.swing.JComboBox;
-
-import Model.Classe;
+import Model.Classe; 
 import View.ClasseView;
-public class ClasseController {
-    private Classe Modelo;
-    private ClasseView view;
 
+public class ClasseController {
+    private ClasseView view;
+    private Classe modelo; // Atributo para segurar o modelo
+    private String classeSelecionada = ""; 
 
     public ClasseController(ClasseView view) {
         this.view = view;
-
-        this.Modelo = new Classe();
-
+        
+      
+        this.modelo = new Classe();
+        
+       
+        this.view.configurarModelo(this.modelo);
+        
         JComboBox SC = view.getSelectClasse();
+      
+      
+        if (SC.getSelectedItem() != null) {
+            tratarEArmazenar(SC.getSelectedItem().toString());
+        }
 
-        this.view.configurarModelo(Modelo);
-
-          SC.addActionListener(e -> ARmazenarClasse());
+        SC.addActionListener(e -> ARmazenarClasse());
     }
 
     private void ARmazenarClasse() {
-        String selecionado = view.getSelectClasse().getSelectedItem().toString();
-        String nome = "";
-
-        if (selecionado.contains("Arqueiro")) {
-            nome = selecionado;
+        if (view.getSelectClasse().getSelectedItem() != null) {
+            String selecionado = view.getSelectClasse().getSelectedItem().toString();
+            tratarEArmazenar(selecionado);
         }
+    }
 
-        if (selecionado.contains("Barbáro")) {
-            nome = selecionado;
+  
+    private void tratarEArmazenar(String textoComboBox) {
+        if (textoComboBox.contains("-")) {
+            this.classeSelecionada = textoComboBox.split("-")[0].trim();
+        } else {
+            this.classeSelecionada = textoComboBox.trim();
         }
+        System.out.println("Classe armazenada no Controller: " + this.classeSelecionada);
+    }
 
-        if (selecionado.contains("Clérigo")) {
-            nome = selecionado;
-        }
-
-        if (selecionado.contains("Mago")) {
-            nome = selecionado;
-        }
-
-        System.out.println(nome);
+    public String getClasseSelecionada() {
+        return this.classeSelecionada;
     }
 }

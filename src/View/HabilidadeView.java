@@ -2,50 +2,45 @@ package View;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import Model.Habilidade;
 
 public class HabilidadeView extends JPanel {
     private JCheckBox[] checkHabilidades;
-
-    private Habilidade habilidademodel;
     private JPanel painelFormulario;
 
     public HabilidadeView() {
         setSize(400, 150);
-  
-
-        checkHabilidades = new JCheckBox[4];
-
         montarTela();
     }
 
-    public void configurarModelo(Habilidade model) {
-        this.habilidademodel = model;
+    
+    public void configurarModelo(List<Habilidade> listaHabilidades) {
+      
+        checkHabilidades = new JCheckBox[listaHabilidades.size()];
 
-        String[] habilidadesnome = habilidademodel.getNome();
-        String[] habilitadetaxadeacerto = habilidademodel.getTaxaAcerto();
-
-        for (int i = 0; i < habilidadesnome.length; i++) {
-            String nome = habilidadesnome[i] + "- Taxa de acerto: " + habilitadetaxadeacerto[i];
-            checkHabilidades[i] = new JCheckBox(nome);
+        for (int i = 0; i < listaHabilidades.size(); i++) {
+            Habilidade hab = listaHabilidades.get(i);
+            String textoExibicao = hab.getNome() + " - Taxa de acerto: " + hab.getTaxaAcerto();
+            
+            checkHabilidades[i] = new JCheckBox(textoExibicao);
             painelFormulario.add(checkHabilidades[i]);
         }
+        
+       
+        painelFormulario.revalidate();
+        painelFormulario.repaint();
     }
 
     private void montarTela() {
         setLayout(new BorderLayout(10, 10));
-
-        painelFormulario = new JPanel(new GridLayout(1, 2, 10, 10));
-        painelFormulario.setBorder(
-                BorderFactory.createTitledBorder("Selecionar Habilidade"));
-
+        painelFormulario = new JPanel(new GridLayout(0, 1, 10, 10)); // 0 linhas significa dinâmico
+        painelFormulario.setBorder(BorderFactory.createTitledBorder("Selecionar Habilidade"));
         painelFormulario.add(new JLabel("Escolha a Habilidade:"));
-
         add(painelFormulario, BorderLayout.CENTER);
     }
 
