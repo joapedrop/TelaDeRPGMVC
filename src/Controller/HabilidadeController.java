@@ -16,10 +16,10 @@ public class HabilidadeController {
         this.catalogoHabilidades = new ArrayList<>();
         this.habilidadesSelecionadas = new ArrayList<>();
 
-        catalogoHabilidades.add(new Habilidade("Furtividade", "67%"));
-        catalogoHabilidades.add(new Habilidade("Força", "67%"));
-        catalogoHabilidades.add(new Habilidade("Cura", "67%"));
-        catalogoHabilidades.add(new Habilidade("Roubo", "67%"));
+        catalogoHabilidades.add(new Habilidade("Furtividade", "30%"));
+        catalogoHabilidades.add(new Habilidade("Força", "75%"));
+        catalogoHabilidades.add(new Habilidade("Cura", "50%"));
+        catalogoHabilidades.add(new Habilidade("Magia", "80%"));
 
         this.view.configurarModelo(this.catalogoHabilidades);
 
